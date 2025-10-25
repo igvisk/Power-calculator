@@ -1,8 +1,9 @@
-import tkinter as tk
+# import tkinter as tk
+from tkinter import *
 from tkinter import ttk                                      #Tk themed widgets (ttk)
 import math
 
-version = "v1.1a"
+version = "v1.2a"
 
 def calculate_power():
     try:
@@ -51,7 +52,7 @@ def calculate_power():
         label_result.config(text="❌ Zadaj platné číselné hodnoty.")
 
 # GUI setup
-window = tk.Tk()
+window = Tk()
 window.title(f"Výkon {version}")
 window.resizable(False,False)
 
@@ -167,6 +168,76 @@ ttk.Button(window, text="Vypočítať výkon", style="My.TButton", command=calcu
     #Label-Output, vysledky
 label_result = ttk.Label(window, text="", justify="left", style="MyOutput.TLabel")
 label_result.grid(column=0, row=5, columnspan=2)
+
+#Menu
+#Menu funkcie
+def quit_app():
+    window.quit()
+
+def show_about():
+    about_window = Tk()
+    about_window.title('About')
+    # about_window.iconbitmap(ico_path)                 dopln ikonu
+    #Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
+    #Rozmery okna
+    about_window_width = 200
+    about_window_height = 120
+    # Ziska rozlisenie obrazovky
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    # Vypocet pozicie okna na stred obrazovky
+    x = (screen_width // 2) - (about_window_width // 2)
+    y = (screen_height // 2) - (about_window_height // 2)
+    # Nastavenie pozicie okna a veľkosť okna
+    about_window.geometry(f"{about_window_width}x{about_window_height}+{x}+{y}")
+
+    
+    
+    
+    about_window.resizable(False,False)
+    about_window.config(bg= color_background)
+    about_window_label = Label(about_window, text=
+    f"Aplikácia: Výkon\n"
+    f"Verzia: {version}\n"
+    f"\n\nAutor:     Igor Vitovský\n"
+    f"e-mail:    igvisk.pro@gmail.com\n"
+    f"GitHub:  github.com/igvisk\n"
+    f"Copyright © 2025 Igor Vitovský", 
+    bg=color_background, 
+    fg="white", justify=LEFT,
+    font=(font_global, 10), 
+    )
+    about_window_label.grid()
+    about_window.bind("<Escape>", lambda e: about_window.destroy())                   #shortcut - ESC - close about_window       
+
+  
+# Vytvorenie hlavného menu
+menu_bar = Menu(window)
+window.config(menu=menu_bar)
+
+# --- 1 Súbor ---
+file_menu = Menu(menu_bar, tearoff=0)
+file_menu.add_command(label="Nový výpočet  Ctrl+N", command=calculate_power)          #Stlacenie vypoctu -funkcia distance
+file_menu.add_separator()
+file_menu.add_command(label="Ukončiť             Ctrl+Q", command=window.quit)
+menu_bar.add_cascade(label="Súbor", menu=file_menu)
+
+# --- 2 Help/Pomocník ---
+help_menu = Menu(menu_bar, tearoff=0)
+help_menu.add_command(label="O programe  F1", command=show_about)          
+menu_bar.add_cascade(label="Pomoc", menu=help_menu)
+
+# --- Klávesové skratky (bind) ---
+window.bind("<Control-n>", lambda event: calculate_power())                # .bind("<Key-combination>", lambda event: run_function())
+window.bind("<Control-q>", lambda event: quit_app())
+window.bind("<F1>", lambda event: show_about())
+
+
+
+
+
+
+
 
 #Mainloop
 window.mainloop()
