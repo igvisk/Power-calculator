@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk                                      #Tk themed widgets (ttk)
 import math
 
-version = "1.1a"
+version = "v1.1a"
 
 def calculate_power():
     try:
@@ -31,8 +31,8 @@ def calculate_power():
             active_power = apparent_power * power_factor
             reactive_power = apparent_power * math.sqrt(1 - power_factor**2)
         
-        elif phases == 3:
-            if voltage not in range(220, 241):                                          #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
+        elif phases == 3:                                                          
+            if not (210 <= voltage <=250):                                              # if voltage not in range(210, 251): #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
                 entry_voltage.configure(style="Error.TEntry")
             else:
                 entry_voltage.configure(style="My.TEntry")
@@ -43,16 +43,17 @@ def calculate_power():
         
 
         label_result.config(text=(
-            f"Činný výkon (P):     {active_power:.2f}  kW\n"                              #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
-            f"Zdanlivý výkon (S): {apparent_power:.2f} kVA\n"                                  #⚡  
-            f"Jalový výkon (Q):    {reactive_power:.2f} kVAr"                                  #🔄 
+            f"Činný výkon (P):     {active_power:.2f}  kW\n"                             #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
+            f"Zdanlivý výkon (S): {apparent_power:.2f} kVA\n"                            #⚡  
+            f"Jalový výkon (Q):    {reactive_power:.2f} kVAr"                            #🔄 
         ))
     except ValueError:
         label_result.config(text="❌ Zadaj platné číselné hodnoty.")
 
 # GUI setup
 window = tk.Tk()
-window.title(f"Kalkulačka výkonu {version}")
+window.title(f"Výkon {version}")
+window.resizable(False,False)
 
 #Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
     #Rozmery okna
