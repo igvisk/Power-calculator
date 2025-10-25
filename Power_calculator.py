@@ -6,9 +6,9 @@ version = "1.0"
 
 def calculate_power():
     try:
-        current = float(entry_current.get())
-        voltage = float(entry_voltage.get())
-        power_factor = float(entry_pf.get())
+        current = float(entry_current.get().replace(',', '.'))                        #get data from input + ochrana pred zadanim "," pri float
+        voltage = float(entry_voltage.get().replace(',', '.'))
+        power_factor = float(entry_pf.get().replace(',', '.'))
         phases = int(combo_phase.get())
 
         sin_phi = math.sqrt(1 - power_factor**2)
