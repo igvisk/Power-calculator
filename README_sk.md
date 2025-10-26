@@ -25,6 +25,8 @@ F1 – okno O programe
 
 Okno O programe s vysvetlením účinníka a typickými hodnotami pre rôzne záťaže
 
+ESC -Uzavretie okna O programe
+
 
 
 🖼️ Ukážka

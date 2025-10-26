@@ -34,6 +34,8 @@ Keyboard shortcuts:
 
 About window includes explanation of power factor and typical values for various loads
 
+* ESC - close About window
+
 
 
 🖼️ Preview
