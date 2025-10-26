@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk                                                               #Tk themed widgets (ttk)
 import math
+import os
 
 version = "v1.2"           
 
@@ -54,10 +55,12 @@ window = Tk()
 window.title(f"Výkon {version}")
 window.resizable(False,False)
 
+
+
 #Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
     #Rozmery okna
 window_width = 250
-window_height = 230
+window_height = 235
     # Ziska rozlisenie obrazovky
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -66,6 +69,10 @@ x = (screen_width // 2) - (window_width // 2)
 y = (screen_height // 2) - (window_height // 2)
     # Nastavenie pozicie okna a veľkosť okna
 window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+
+#Ikona
+icon_path = os.path.join(os.path.dirname(__file__), "Power_calculator.ico")             #ziska absolutnu cestu k suboru, musi byt umiestnena pod vypoctom pozicie
+window.iconbitmap(icon_path)
 
 #ttk stylovanie:
 #Colors and fonts
@@ -163,14 +170,13 @@ label_result = ttk.Label(window, text="", justify="left", style="MyOutput.TLabel
 label_result.grid(column=0, row=5, columnspan=2)
 
 #Menu
-#Menu funkcie
 def quit_app():
     window.quit()
 
 def show_about():
-    about_window = Toplevel()
+    about_window = Tk()
     about_window.title('O programe')
-    # about_window.iconbitmap(icon_path)                 dopln ikonu
+    about_window.iconbitmap(icon_path)                 
     #Rozmery okna a vypocet pozicie about_window na pravy bok od hlavneho okna /pre kazde rozlisenie/
     #Rozmery okna
     about_window_width = 450
@@ -218,7 +224,7 @@ def show_about():
     about_window_label.grid()
     about_window.bind("<Escape>", lambda e: about_window.destroy())                   #shortcut - ESC - close about_window       
 
-# Vytvorenie hlavného menu
+    #Vytvorenie hlavného menu
 menu_bar = Menu(window)
 window.config(menu=menu_bar)
 
