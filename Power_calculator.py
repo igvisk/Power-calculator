@@ -42,7 +42,7 @@ def calculate_power():
             reactive_power = apparent_power * sin_phi
         
         label_result.config(text=(
-            f"Činný výkon (P):     {active_power:.2f}  W\n"                             #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
+            f"Činný výkon (P):     {active_power:.2f} W\n"                             #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
             f"Zdanlivý výkon (S): {apparent_power:.2f} VA\n"                            #⚡  
             f"Jalový výkon (Q):    {reactive_power:.2f} VAr"                            #🔄 
         ))
@@ -99,7 +99,7 @@ style.configure("Error.TEntry",
 style.configure("My.TCombobox",
     font=(font_global, 10),
     padding=4,
-    foreground= "black",                 # farba textu
+    foreground= "black",                       # farba textu
     background= "#14B898",                   # farba znaku rolletky (len pre niektoré témy)
     # fieldbackground= 'green'
 )
@@ -111,7 +111,7 @@ style.configure("My.TButton",
 
 style.map("My.TButton",
     background=[
-        ("active", color_input_bg),         # farba pri hovernutí "#8CA63F"
+        ("active", color_input_bg),             # farba pri hovernutí "#8CA63F"
         ("!disabled", color_background)
     ],
     foreground=[
@@ -135,7 +135,7 @@ style.configure("MyOutput.TLabel",
 
 # Labels + Entries - inputs okienka:
 ttk.Label(window, text="Prúd (A):", style="My.TLabel").grid(column=0, row=0, sticky="w")            # Label!
-entry_current = ttk.Entry(window, justify="center", style="My.TEntry")                                                # Entry (okno, ttk_styl)!
+entry_current = ttk.Entry(window, justify="center", style="My.TEntry")                              # Entry (okno, ttk_styl)!
 entry_current.insert(0, 16)                                                                         # default value
 entry_current.grid(column=1, row=0)
 
@@ -170,11 +170,11 @@ def quit_app():
 def show_about():
     about_window = Toplevel()
     about_window.title('O programe')
-    # about_window.iconbitmap(ico_path)                 dopln ikonu
-    #Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
+    # about_window.iconbitmap(icon_path)                 dopln ikonu
+    #Rozmery okna a vypocet pozicie about_window na pravy bok od hlavneho okna /pre kazde rozlisenie/
     #Rozmery okna
     about_window_width = 450
-    about_window_height = 400
+    about_window_height = 410
     about_window.resizable(False,False)
     # Ziska rozlisenie obrazovky
     screen_width = window.winfo_screenwidth()
@@ -209,7 +209,8 @@ def show_about():
     "\n\nAutor:     Igor Vitovský\n"
     "e-mail:    igvisk.pro@gmail.com\n"
     "GitHub:  github.com/igvisk\n"
-    "Copyright © 2025 Igor Vitovský", 
+    "Copyright © 2025 Igor Vitovský\n"
+    "Licencia: MIT License", 
     bg=color_background, 
     fg="white", justify=LEFT,
     font=(font_global, 10), 
