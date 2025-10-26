@@ -179,14 +179,14 @@ def show_about():
     about_window.iconbitmap(icon_path)                 
     #Rozmery okna a vypocet pozicie about_window na pravy bok od hlavneho okna /pre kazde rozlisenie/
     #Rozmery okna
-    about_window_width = 450
+    about_window_width = 500
     about_window_height = 410
     about_window.resizable(False,False)
     # Ziska rozlisenie obrazovky
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
     # Vypocet pozicie okna na stred obrazovky
-    x = (screen_width // 2) - (about_window_width // 2) + 370
+    x = (screen_width // 2) - (about_window_width // 2) + 400
     y = (screen_height // 2) - (about_window_height // 2) + 87
     # Nastavenie pozicie okna a veľkosť okna
     about_window.geometry(f"{about_window_width}x{about_window_height}+{x}+{y}")   
@@ -206,14 +206,14 @@ def show_about():
 
     "✅ Recommended values by load type\n"
 
-    "Load type                    Example devices               Typical power factor\n"
-    "Resistive (pure)             Bulbs, heaters                1.0\n"
-    "Inductive (motor)            Electric motors, compressors  0.8 – 0.95\n"
-    "Capacitive (compensation)    Capacitor banks               >1.0 (theoretically)\n"
-    "Mixed (real-world usage)     Household appliances, PC, LED 0.9 – 0.98\n"
+    "Load type                          Example devices                     Typical power factor\n"
+    "Resistive (pure)                   Bulbs, heaters                                  1.0\n"
+    "Inductive (motor)                  Electric motors, compressors            0.8 – 0.95\n"
+    "Capacitive (compensation)    Capacitor banks                               >1.0 (theoretically)\n"
+    "Mixed (real-world usage)       Household appliances, PC, LED        0.9 – 0.98\n"
 
     "\n\nAuthor:     Igor Vitovský\n"
-    "e-mail:     igvisk.pro@gmail.com\n"
+    "e-mail:      igvisk.pro@gmail.com\n"
     "GitHub:     github.com/igvisk\n"
     "Copyright © 2025 Igor Vitovský\n"
     "License:    MIT License",
