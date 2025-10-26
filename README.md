@@ -1,47 +1,86 @@
-📘 Výkon – Power Calculator
-Jednoduchá desktopová aplikácia v Python + Tkinter, ktorá počíta činný, jalový a zdanlivý výkon pre 1-fázové, 2-fázové a 3-fázové zapojenia.Aplikácia je určená pre študentov, elektrikárov a technikov, ktorí potrebujú rýchly výpočet elektrických výkonov.
+📘 Power – Power Calculator
 
-✨ Funkcie
+A simple desktop application built with Python + Tkinter that calculates active, reactive, and apparent power for single-phase, two-phase, and three-phase systems.
 
-Výpočet:
-Činný výkon (P) – užitočný výkon
-Jalový výkon (Q) – induktívna/kapacitná zložka
-Zdanlivý výkon (S) – celkový výkon
+Designed for students, electricians, and technicians who need quick electrical power calculations.
 
-Podpora 1, 2 a 3 fázových zapojení
 
-Automatická kontrola vstupov (napätie mimo rozsahu zvýrazní červeným pozadím)
 
-Prednastavené hodnoty pre rýchle testovanie
+✨ Features
 
-Moderný vzhľad s vlastnými štýlmi (ttk.Style)
+Calculations:
 
-Klávesové skratky:
-Ctrl+N – nový výpočet
-Ctrl+Q – ukončenie aplikácie
-F1 – okno O programe
+\- Active Power (P) – useful power
 
-Okno O programe s vysvetlením účinníka a typickými hodnotami pre rôzne záťaže
+\- Reactive Power (Q) – inductive/capacitive component
 
-🖼️ Ukážka
+\- Apparent Power (S) – total power
 
-!\[Ukážka aplikácie Power calculator](images/power.jpg)
+Supports single-phase, two-phase, and three-phase systems
 
-🚀 Spustenie
+Automatic input validation (voltage out of range is highlighted with a red background)
 
-1\. Požiadavky
-Python 3.8+
-Knižnice: tkinter (súčasť štandardnej knižnice)
+Preset values for quick testing
 
-2\. Spustenie aplikácie
-python Power_calculator.py
+Modern look with custom styles using ttk.Style
 
-⚡ Použitie
-Zadaj prúd (A), napätie (V/ph) a účinník (cos φ).
-Vyber počet fáz (1, 2 alebo 3).
-Klikni na Vypočítať výkon alebo stlač Ctrl+N.
-Výsledky sa zobrazia v spodnej časti okna.
+Keyboard shortcuts:
 
-📄 Licencia
-Tento projekt je licencovaný pod MIT License.© 2025 Igor Vitovský
+\- Ctrl+N – new calculation
+
+\- Ctrl+Q – exit application
+
+\- F1 – About window
+
+About window includes explanation of power factor and typical values for various loads
+
+
+
+🖼️ Preview
+
+!\\\[Power Calculator App Preview](images/power.jpg)
+
+
+
+
+
+🚀 Getting Started
+
+1\. Requirements
+
+\- Python 3.8+
+
+\- Libraries: tkinter (included in the standard library)
+
+2\. Launching the App:
+
+eng version:
+
+python Power\_calculator.py
+
+
+
+sk version:
+
+python Power\_calculator\_sk.py
+
+
+
+⚡ Usage
+
+Enter current (A), voltage (V/ph), and power factor (cos φ).
+
+Select the number of phases (1, 2, or 3).
+
+Click “Calculate Power” or press Ctrl+N.
+
+Results will appear at the bottom of the window.
+
+
+
+📄 License
+
+This project is licensed under the MIT License.
+
+© 2025 Igor Vitovský
 
