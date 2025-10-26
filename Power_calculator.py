@@ -14,7 +14,7 @@ def calculate_power():
         sin_phi = math.sqrt(1 - power_factor**2)
 
         if phases == 1:
-            if voltage not in range(220, 241):                                          #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
+            if not (210 <= voltage <= 250):                                            #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
                 entry_voltage.configure(style="Error.TEntry")
             else:
                 entry_voltage.configure(style="My.TEntry")
@@ -32,7 +32,7 @@ def calculate_power():
             reactive_power = apparent_power * math.sqrt(1 - power_factor**2)
         
         elif phases == 3:                                                          
-            if not (210 <= voltage <=250):                                              # if voltage not in range(210, 251): #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
+            if not (210 <= voltage <= 250):                                              # if voltage not in range(210, 251): #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
                 entry_voltage.configure(style="Error.TEntry")
             else:
                 entry_voltage.configure(style="My.TEntry")
