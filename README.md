@@ -40,7 +40,7 @@ About window includes explanation of power factor and typical values for various
 
 🖼️ Preview
 
-!\\\[Power Calculator App Preview](images/power.jpg)
+!\[Power Calculator App Preview](images/power.jpg)
 
 
 
