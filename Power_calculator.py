@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk                                      #Tk themed widgets (ttk)
 import math
 
-version = "v1.2a"
+version = "v1.2a"           #je tam bug pre 2 fazy v Tk treba vydumat
 
 def calculate_power():
     try:
@@ -25,10 +25,10 @@ def calculate_power():
             reactive_power = apparent_power * sin_phi
         
         elif phases == 2:                                                               # Medzifázové jednofazove zapojenie v Európe - 2 fázy = medzi dvoma fázami (napr. L1–L2), 400 V bez nulového vodiča
-            entry_voltage.delete(0, tk.END)                                             # vymaže obsah vstupu
-            entry_voltage.insert(0, 400)
+            entry_voltage.delete(0, END)                                                # vymaže obsah vstupu
+            entry_voltage.insert(0, 400)                                                # vlozi do voltage entry 400, kedze pri zpojeni L1-L2 vznika 400V
             voltage = float(entry_voltage.get().replace(',', '.'))                      #nacitanie hodnoty 400 ktora vznikne pri L1,L2 (nemoze byt zadane 230V)
-            apparent_power = math.sqrt(3) * voltage * current
+            apparent_power = math.sqrt(3) * voltage * current                           #CHYBA
             active_power = apparent_power * power_factor
             reactive_power = apparent_power * math.sqrt(1 - power_factor**2)
         
@@ -42,7 +42,6 @@ def calculate_power():
             active_power = apparent_power * power_factor
             reactive_power = apparent_power * sin_phi
         
-
         label_result.config(text=(
             f"Činný výkon (P):     {active_power:.2f}  kW\n"                             #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
             f"Zdanlivý výkon (S): {apparent_power:.2f} kVA\n"                            #⚡  
@@ -175,34 +174,48 @@ def quit_app():
     window.quit()
 
 def show_about():
-    about_window = Tk()
-    about_window.title('About')
+    about_window = Toplevel()
+    about_window.title('O programe')
     # about_window.iconbitmap(ico_path)                 dopln ikonu
     #Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
     #Rozmery okna
-    about_window_width = 200
-    about_window_height = 120
+    about_window_width = 450
+    about_window_height = 400
+    about_window.resizable(False,False)
     # Ziska rozlisenie obrazovky
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
     # Vypocet pozicie okna na stred obrazovky
-    x = (screen_width // 2) - (about_window_width // 2)
-    y = (screen_height // 2) - (about_window_height // 2)
+    x = (screen_width // 2) - (about_window_width // 2) + 355
+    y = (screen_height // 2) - (about_window_height // 2) + 85
     # Nastavenie pozicie okna a veľkosť okna
-    about_window.geometry(f"{about_window_width}x{about_window_height}+{x}+{y}")
-
+    about_window.geometry(f"{about_window_width}x{about_window_height}+{x}+{y}")   
     
-    
-    
-    about_window.resizable(False,False)
     about_window.config(bg= color_background)
     about_window_label = Label(about_window, text=
-    f"Aplikácia: Výkon\n"
-    f"Verzia: {version}\n"
-    f"\n\nAutor:     Igor Vitovský\n"
-    f"e-mail:    igvisk.pro@gmail.com\n"
-    f"GitHub:  github.com/igvisk\n"
-    f"Copyright © 2025 Igor Vitovský", 
+    "Aplikácia: Výkon\n"
+    f"Verzia: {version}\n\n"
+    "Vysvetlívky:\n"
+    "⚡ Čo je účinník (cos φ)?\n"
+    "- Účinník vyjadruje, aký podiel z celkového výkonu je „činný“ (užitočný).\n"
+    "- Hodnota je medzi 0 a 1:\n"
+    "- 1.0 = ideálny stav (čisto činný výkon, žiadna jalová zložka)\n"
+    "- 0.9 – 0.95 = bežné hodnoty pre moderné spotrebiče\n"
+    "- 0.8 – 0.9 = staršie motory, transformátory\n"
+    "- < 0.8 = výrazne induktívne alebo kapacitné zariadenia\n\n"
+
+    "✅ Odporúčané hodnoty podľa typu záťaže\n"
+
+    "Typ záťaže                   Príklad zariadenia          Typický účinník\n"
+    "Rezistívna (čistá)           Žiarovky, ohrievače         1.0\n"
+    "Induktívna (motorická)       Elektromotory, kompresory   0.8 – 0.95\n"
+    "Kapacitná (kompenzácia)      Kondenzátorové batérie      >1.0 (teoreticky)\n"
+    "Zmiešaná (reálna prevádzka)  Domáce spotrebiče, PC, LED  0.9 – 0.98\n"
+
+    "\n\nAutor:     Igor Vitovský\n"
+    "e-mail:    igvisk.pro@gmail.com\n"
+    "GitHub:  github.com/igvisk\n"
+    "Copyright © 2025 Igor Vitovský", 
     bg=color_background, 
     fg="white", justify=LEFT,
     font=(font_global, 10), 
@@ -210,7 +223,6 @@ def show_about():
     about_window_label.grid()
     about_window.bind("<Escape>", lambda e: about_window.destroy())                   #shortcut - ESC - close about_window       
 
-  
 # Vytvorenie hlavného menu
 menu_bar = Menu(window)
 window.config(menu=menu_bar)
@@ -232,31 +244,5 @@ window.bind("<Control-n>", lambda event: calculate_power())                # .bi
 window.bind("<Control-q>", lambda event: quit_app())
 window.bind("<F1>", lambda event: show_about())
 
-
-
-
-
-
-
-
 #Mainloop
 window.mainloop()
-
-
-# Do helpu:
-
-# ⚡ Čo je účinník (cos φ)?
-# - Účinník vyjadruje, aký podiel z celkového výkonu je „činný“ (užitočný).
-# - Hodnota je medzi 0 a 1:
-# - 1.0 = ideálny stav (čisto činný výkon, žiadna jalová zložka)
-# - 0.9 – 0.95 = bežné hodnoty pre moderné spotrebiče
-# - 0.8 – 0.9 = staršie motory, transformátory
-# - < 0.8 = výrazne induktívne alebo kapacitné zariadenia
-
-# ✅ Odporúčané hodnoty podľa typu záťaže
-
-# Typ záťaže                   Príklad zariadenia          Typický účinník
-# Rezistívna (čistá)           Žiarovky, ohrievače         1.0
-# Induktívna (motorická)       Elektromotory, kompresory   0.8 – 0.95
-# Kapacitná (kompenzácia)      Kondenzátorové batérie      >1.0 (teoreticky)
-# Zmiešaná (reálna prevádzka)  Domáce spotrebiče, PC, LED  0.9 – 0.98
