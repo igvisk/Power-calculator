@@ -1,9 +1,8 @@
-# import tkinter as tk
 from tkinter import *
-from tkinter import ttk                                      #Tk themed widgets (ttk)
+from tkinter import ttk                                                               #Tk themed widgets (ttk)
 import math
 
-version = "v1.2a"           #je tam bug pre 2 fazy v Tk treba vydumat
+version = "v1.2"           
 
 def calculate_power():
     try:
@@ -28,7 +27,7 @@ def calculate_power():
             entry_voltage.delete(0, END)                                                # vymaže obsah vstupu
             entry_voltage.insert(0, 400)                                                # vlozi do voltage entry 400, kedze pri zpojeni L1-L2 vznika 400V
             voltage = float(entry_voltage.get().replace(',', '.'))                      #nacitanie hodnoty 400 ktora vznikne pri L1,L2 (nemoze byt zadane 230V)
-            apparent_power = math.sqrt(3) * voltage * current                           #CHYBA
+            apparent_power = math.sqrt(3) * voltage * current                           #CHYBA spravne: apparent_power = voltage * current; 
             active_power = apparent_power * power_factor
             reactive_power = apparent_power * math.sqrt(1 - power_factor**2)
         
@@ -43,9 +42,9 @@ def calculate_power():
             reactive_power = apparent_power * sin_phi
         
         label_result.config(text=(
-            f"Činný výkon (P):     {active_power:.2f}  kW\n"                             #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
-            f"Zdanlivý výkon (S): {apparent_power:.2f} kVA\n"                            #⚡  
-            f"Jalový výkon (Q):    {reactive_power:.2f} kVAr"                            #🔄 
+            f"Činný výkon (P):     {active_power:.2f}  W\n"                             #var:.2f -zaokruhli variable na 2 desatinne miesta #✅ 
+            f"Zdanlivý výkon (S): {apparent_power:.2f} VA\n"                            #⚡  
+            f"Jalový výkon (Q):    {reactive_power:.2f} VAr"                            #🔄 
         ))
     except ValueError:
         label_result.config(text="❌ Zadaj platné číselné hodnoty.")
@@ -68,20 +67,17 @@ y = (screen_height // 2) - (window_height // 2)
     # Nastavenie pozicie okna a veľkosť okna
 window.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
-
 #ttk stylovanie:
 #Colors and fonts
 color_background = "#1778F2"               #origin gray
 color_foreground = "#F0F2F5"               #origin white
 color_input_bg = "#14B898"                 #origin "#8CA63F" -zelena
 
-font_global = "Helvetica Neue"                      #origin "Segoe UI", "Helvetica Neue", "Roboto"
-
+font_global = "Helvetica Neue"               #origin "Segoe UI", "Helvetica Neue", "Roboto"
 
 window.configure(background= color_background)
 style = ttk.Style()
-style.theme_use("clam")                                                              # pouziva sa ak nieje stanovene background "clam"-najviac customizovatelne, "alt", "classic", "default"
-
+style.theme_use("clam")                      # pouziva sa ak nieje stanovene background "clam"-najviac customizovatelne, "alt", "classic", "default"
 
     #input okno ttk styl:
 style.configure("My.TEntry",
@@ -137,13 +133,11 @@ style.configure("MyOutput.TLabel",
     background= color_background
 )
 
-
 # Labels + Entries - inputs okienka:
 ttk.Label(window, text="Prúd (A):", style="My.TLabel").grid(column=0, row=0, sticky="w")            # Label!
 entry_current = ttk.Entry(window, justify="center", style="My.TEntry")                                                # Entry (okno, ttk_styl)!
 entry_current.insert(0, 16)                                                                         # default value
 entry_current.grid(column=1, row=0)
-
 
 ttk.Label(window, text="Napätie (V/ph):", style="My.TLabel").grid(column=0, row=1, sticky="w")
 entry_voltage = ttk.Entry(window, justify="center", style="My.TEntry")
