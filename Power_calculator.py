@@ -27,7 +27,7 @@ def calculate_power():
             entry_voltage.delete(0, END)                                                # vymaže obsah vstupu
             entry_voltage.insert(0, 400)                                                # vlozi do voltage entry 400, kedze pri zpojeni L1-L2 vznika 400V
             voltage = float(entry_voltage.get().replace(',', '.'))                      #nacitanie hodnoty 400 ktora vznikne pri L1,L2 (nemoze byt zadane 230V)
-            apparent_power = math.sqrt(3) * voltage * current                           #CHYBA spravne: apparent_power = voltage * current; 
+            apparent_power = voltage * current                           
             active_power = apparent_power * power_factor
             reactive_power = apparent_power * math.sqrt(1 - power_factor**2)
         
