@@ -3,7 +3,7 @@ from tkinter import ttk                                                         
 import math
 import os
 
-version = "v1.2"           
+version = "v1.3a"           
 
 def calculate_power():
     try:
@@ -15,6 +15,12 @@ def calculate_power():
         sin_phi = math.sqrt(1 - power_factor**2)
 
         if phases == 1:
+        #kontrola spravneho rozsahu a jeho nastavenie
+            if voltage >=301:
+                entry_voltage.delete(0, END)                                                # vymaže obsah vstupu
+                entry_voltage.insert(0, 230)
+            
+            voltage = float(entry_voltage.get().replace(',', '.'))
             if not (210 <= voltage <= 250):                                            #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
                 entry_voltage.configure(style="Error.TEntry")
             else:
@@ -25,15 +31,31 @@ def calculate_power():
             reactive_power = apparent_power * sin_phi
         
         elif phases == 2:                                                               # Medzifázové jednofazove zapojenie v Európe - 2 fázy = medzi dvoma fázami (napr. L1–L2), 400 V bez nulového vodiča
-            entry_voltage.delete(0, END)                                                # vymaže obsah vstupu
-            entry_voltage.insert(0, 400)                                                # vlozi do voltage entry 400, kedze pri zpojeni L1-L2 vznika 400V
+            #kontrola spravneho rozsahu a jeho nastavenie
+            if (0 <= voltage <= 300):
+                entry_voltage.delete(0, END)                                            # vymaže obsah vstupu
+                entry_voltage.insert(0, 400)                                            # vlozi do voltage entry 400, kedze pri zpojeni L1-L2 vznika 400V
+            
             voltage = float(entry_voltage.get().replace(',', '.'))                      #nacitanie hodnoty 400 ktora vznikne pri L1,L2 (nemoze byt zadane 230V)
+            if not (360 <= voltage <= 430):                                             # if voltage not in range(364, 433): #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
+                entry_voltage.configure(style="Error.TEntry")
+            else:
+                entry_voltage.configure(style="My.TEntry")
+                
+            
             apparent_power = voltage * current                           
             active_power = apparent_power * power_factor
             reactive_power = apparent_power * math.sqrt(1 - power_factor**2)
         
-        elif phases == 3:                                                          
-            if not (210 <= voltage <= 250):                                              # if voltage not in range(210, 251): #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
+        elif phases == 3:
+            #kontrola spravneho rozsahu a jeho nastavenie
+            if (0 <= voltage <= 300):
+                entry_voltage.delete(0, END)                                                # vymaže obsah vstupu
+                entry_voltage.insert(0, 400)                                                # vlozi do voltage entry 400, kedze pri zpojeni L1-L2 vznika 400V
+            
+            voltage = float(entry_voltage.get().replace(',', '.'))                          #nacitanie hodnoty napatia
+
+            if not (360 <= voltage <= 430):                                              # if voltage not in range(364, 433): #ochrana pri zadani netypickeho napatial, zmeni sa styl entry okna tak aby upozornil uzivatela
                 entry_voltage.configure(style="Error.TEntry")
             else:
                 entry_voltage.configure(style="My.TEntry")
@@ -148,7 +170,7 @@ entry_current.grid(column=1, row=0)
 
 ttk.Label(window, text="Voltage (V/ph):", style="My.TLabel").grid(column=0, row=1, sticky="w")
 entry_voltage = ttk.Entry(window, justify="center", style="My.TEntry")
-entry_voltage.insert(0, 230)
+entry_voltage.insert(0, 400)
 entry_voltage.grid(column=1, row=1)
 
 ttk.Label(window, text="Power factor (cos φ):", style="My.TLabel").grid(column=0, row=2, sticky="w")
