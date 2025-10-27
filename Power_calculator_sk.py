@@ -3,7 +3,7 @@ from tkinter import ttk                                                         
 import math
 import os
 
-version = "v1.3a"           
+version = "v1.3"           
 
 def calculate_power():
     try:
